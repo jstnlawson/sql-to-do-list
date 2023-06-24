@@ -2,6 +2,28 @@ $(document).ready(onReady)
 
 function onReady() {
 getTodos()
+$('#submit-btn').on('click', postTask)
+}
+
+function postTask() {
+    let todoObject = {
+        task: $('#task-input').val()
+    }
+    $.ajax({
+        method: "POST",
+        url: "/todo",
+        data: todoObject,
+      })
+        .then((response) => {
+          console.log("Response from server.", response);
+          $('#task-input').val()
+          getTodos();
+        })
+        .catch((error) => {
+          console.log("Error in POST", error);
+          alert("Unable to add task at this time.");
+        });
+
 }
 
 // GET request to put todos from database onto DOM
@@ -21,9 +43,7 @@ function getTodos() {
   } // end getTodos
 
 
-let todoObject = {
-    task: $('#task-input').val()
-}
+
 
 function renderTodos(todos) {
     $("#task-box").empty();
