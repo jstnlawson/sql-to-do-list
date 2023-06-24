@@ -3,6 +3,7 @@ $(document).ready(onReady)
 function onReady() {
 getTodos()
 $('#submit-btn').on('click', postTask)
+$('#task-box').on('click', '.complete-btn', todoComplete)
 }
 
 function postTask() {
@@ -44,9 +45,24 @@ function getTodos() {
       });
   } // end getTodos
 
+  //put/complete function
+  function todoComplete() {
+    let idToUpdate = $(this).parent().parent().data("id");
+    //let idToUpdate = $(this).parent().data("id");
+    $.ajax({
+      type: "PUT",
+      url: `/todo/${idToUpdate}`,
+    })
+      .then((response) => {
+        console.log("todo complete is set to true", response);
+        getTodos();
+      })
+      .catch((error) => {
+        console.log("Error in complete toggle", error);
+      });
+  }
 
-
-
+//render
 function renderTodos(todos) {
     $("#task-box").empty();
   
@@ -54,10 +70,10 @@ function renderTodos(todos) {
       let todo = todos[i];
       let newRow = $(`
       <tr data-id = ${todo.id}>
-      <td>${todo.task}</td>
-      <td>${todo.complete}</td>
-      <td><button class = "complete-btn">Complete?</button></td>
-      <td><button class = "delete-btn">❌</button></td>
+        <td>${todo.task}</td>
+        <td>${todo.complete}</td>
+        <td><button class="complete-btn">Complete?</button></td>
+        <td><button class = "delete-btn">❌</button></td>
       </tr>
     `);
     $("#task-box").append(newRow);

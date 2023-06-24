@@ -35,4 +35,21 @@ todoRouter.post('/', (req, res) => {
     })
 });
 
+// put/complete
+todoRouter.put('/:id', (req, res) => {
+    const idToUpdate = req.params.id
+    //toggle between boolean values
+    let query = `UPDATE "todo" SET "complete" = NOT "complete"
+    WHERE id = $1;`;
+    pool.query(query, [idToUpdate])
+.then((results) => {
+    console.log("success in the router.put")
+    res.sendStatus(200)
+})
+.catch((error) => {
+    console.log('error making DB query', error)
+    res.sendStatus(500)
+})
+});
+
 module.exports = todoRouter;
