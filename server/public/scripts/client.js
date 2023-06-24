@@ -7,7 +7,8 @@ $('#submit-btn').on('click', postTask)
 
 function postTask() {
     let todoObject = {
-        task: $('#task-input').val()
+        task: $('#task-input').val(),
+        complete: $('#task-complete').val(),
     }
     $.ajax({
         method: "POST",
@@ -16,7 +17,8 @@ function postTask() {
       })
         .then((response) => {
           console.log("Response from server.", response);
-          $('#task-input').val()
+          $('#task-input').val(""),
+          $('#task-complete').val("");
           getTodos();
         })
         .catch((error) => {
@@ -53,7 +55,8 @@ function renderTodos(todos) {
       let newRow = $(`
       <tr data-id = ${todo.id}>
       <td>${todo.task}</td>
-      <td><button class = "complete-btn">✔</button></td>
+      <td>${todo.complete}</td>
+      <td><button class = "complete-btn">Complete?</button></td>
       <td><button class = "delete-btn">❌</button></td>
       </tr>
     `);

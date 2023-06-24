@@ -5,7 +5,7 @@ const pool = require('../modules/pool')
 //get
 todoRouter.get('/', (req, res) => {
 
-    let queryText = 'SELECT "task" FROM "todo"'
+    let queryText = 'SELECT "task", "complete" FROM "todo"'
     pool.query(queryText).then(results => {
         res.send(results.rows)
     })
@@ -21,10 +21,11 @@ todoRouter.post('/', (req, res) => {
     console.log("Inside POST /, req.body:", todo);
 
     let task = req.body.task;
+    let complete = req.body.complete;
 
-    const query = `INSERT INTO "todo" ("task") VALUES ($1);`
+    const query = `INSERT INTO "todo" ("task",  "complete") VALUES ($1, $2);`
 
-    pool.query(query, [task])
+    pool.query(query, [task, complete])
     .then((result) => {
         console.log("task inserted into table 'todo' in database.");
         res.sendStatus(201);
