@@ -5,7 +5,7 @@ const pool = require('../modules/pool')
 //get
 todoRouter.get('/', (req, res) => {
 
-    let queryText = 'SELECT "task", "complete" FROM "todo"'
+    let queryText = 'SELECT * FROM "todo"'
     pool.query(queryText).then(results => {
         res.send(results.rows)
     })
