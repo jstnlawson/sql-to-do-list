@@ -52,3 +52,7 @@ tfoot {
 .delete-btn {
     background-color: rgb(211, 163, 163);
 }
+#submit-btn {
+    background-color: rgb(165, 217, 231);
+    border-radius: 5px;
+}

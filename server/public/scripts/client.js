@@ -50,8 +50,10 @@ function getTodos() {
 
   //put/complete function
   function todoComplete() {
-    //let todoId = $(this).parent().parent().data("id");
-    const todoId = $(this).closest("tr").data("id");
+    let todoId = $(this).parent().parent().data("id");
+    //const todoId = $(this).closest("tr").data("id");
+    // let closestTr = $(this).closest("tr")
+    // let todoId = closestTr.data("id")
     console.log('todoId in put', todoId)
     $.ajax({
       type: "PUT",
@@ -100,7 +102,7 @@ function renderTodos(todos) {
     for (let i = 0; i < todos.length; i += 1) {
       let todo = todos[i];
       let newRow = $(`
-      <tr data-id = ${todo.id}>
+      <tr data-id = "${todo.id}">
         <td>${todo.task}</td>
         <td>${todo.complete}</td>
         <td class="td-btn-style"><button class="complete-btn">Complete</button></td>
