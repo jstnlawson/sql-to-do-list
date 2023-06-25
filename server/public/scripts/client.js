@@ -50,10 +50,11 @@ function getTodos() {
 
   //put/complete function
   function todoComplete() {
-    let todoId = $(this).parent().parent().data("id");
+    //let todoId = $(this).parent().parent().data("id");
     //const todoId = $(this).closest("tr").data("id");
-    // let closestTr = $(this).closest("tr")
-    // let todoId = closestTr.data("id")
+    let closestTr = $(this).closest("tr")
+    console.log('closestTr is:', closestTr)
+    let todoId = closestTr.data("id")
     console.log('todoId in put', todoId)
     $.ajax({
       type: "PUT",
