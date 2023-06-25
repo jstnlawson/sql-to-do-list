@@ -1,0 +1,54 @@
+body {
+    font-family: sans-serif;
+    font-variant: small-caps;
+    font-size: x-large;
+}
+
+.true-row {
+    background-color: rgb(165, 217, 231); /* background color for true */
+  }
+  
+  .false-row {
+    background-color: rgb(211, 163, 163); /* background color for false */
+  }
+
+  table {
+    border: solid rgb(165, 217, 231);
+    border-radius: 5px;
+    width: 50%;
+    margin: 0 25%
+  }
+
+thead {
+    height: 50px;
+}  
+
+td {
+    height: 50px;
+    padding: 5px;
+}
+tr {
+    padding: 10px;
+}
+  .td-btn-style {
+    width: 10%;
+    background-color: white;
+  }
+
+tfoot {
+    height: 50px;
+}
+
+.complete-btn, .delete-btn {
+    height: 50px;
+    width: 80px;
+    border-radius: 5px;
+} 
+
+.complete-btn {
+    background-color: rgb(165, 217, 231);
+}
+
+.delete-btn {
+    background-color: rgb(211, 163, 163);
+}

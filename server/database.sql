@@ -1,8 +1,9 @@
 CREATE TABLE "todo" (
-	"id" SERIAL PRIMARY KEY,
+	"id" serial primary key,
 	"task" VARCHAR (500) NOT NULL,
-    "complete" BOOLEAN DEFAULT FALSE
+    "complete" boolean default false
 );
 
 INSERT INTO "todo" ("task", "complete")
-VALUES ('clean gutters', false);
+VALUES ('clean gutters', false), ('dishes', true), ('fold laundry', true), ('wax lambo', false);
+

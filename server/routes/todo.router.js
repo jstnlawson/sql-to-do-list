@@ -37,19 +37,37 @@ todoRouter.post('/', (req, res) => {
 
 // put/complete
 todoRouter.put('/:id', (req, res) => {
-    const idToUpdate = req.params.id
+    console.log('inside put, req.params', req.params)
+    let todoId = req.params.id
+    console.log('todoId is', todoId)
     //toggle between boolean values
     let query = `UPDATE "todo" SET "complete" = NOT "complete"
     WHERE id = $1;`;
-    pool.query(query, [idToUpdate])
+    pool.query(query, [todoId])
 .then((results) => {
-    console.log("success in the router.put")
+    console.log(`success in the router.put: ${todoId}`)
     res.sendStatus(200)
 })
 .catch((error) => {
     console.log('error making DB query', error)
     res.sendStatus(500)
 })
+});
+
+//delete
+todoRouter.delete('/:id', (req, res) => {
+    let idToDelete = req.params.id;
+    console.log('id to delete', idToDelete)
+    let query = `DELETE FROM "todo" WHERE "id" = $1`
+
+    pool.query(query, [idToDelete])
+    .then((results) => {
+        console.log("task deleted");
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log("Error making database query:", error);
+        res.sendStatus(500);
+    })
 });
 
 module.exports = todoRouter;

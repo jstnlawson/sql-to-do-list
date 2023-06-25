@@ -1,10 +1,13 @@
-$(document).ready(onReady)
+// $(document).ready(onReady)
 
-function onReady() {
-getTodos()
+$(document).ready(function () {
+
 $('#submit-btn').on('click', postTask)
 $('#task-box').on('click', '.complete-btn', todoComplete)
-}
+$('#task-box').on('click', '.delete-btn', deleteTodo)
+
+getTodos()
+})
 
 function postTask() {
     let todoObject = {
@@ -47,11 +50,12 @@ function getTodos() {
 
   //put/complete function
   function todoComplete() {
-    let idToUpdate = $(this).parent().parent().data("id");
-    //let idToUpdate = $(this).parent().data("id");
+    //let todoId = $(this).parent().parent().data("id");
+    const todoId = $(this).closest("tr").data("id");
+    console.log('todoId in put', todoId)
     $.ajax({
       type: "PUT",
-      url: `/todo/${idToUpdate}`,
+      url: `/todo/${todoId}`,
     })
       .then((response) => {
         console.log("todo complete is set to true", response);
@@ -60,6 +64,33 @@ function getTodos() {
       .catch((error) => {
         console.log("Error in complete toggle", error);
       });
+  }
+
+  //delete task
+  function deleteTodo() {
+    const todoId = $(this).parent().parent().data('id')
+    //const todoId = $(this).closest("tr").data("id");
+    console.log('in deleteTodo', todoId, $(this))
+    $.ajax({
+      method: 'DELETE',
+      url:`/todo/${todoId}`
+    })
+    .then((response) => {
+      console.log('delete a todo', response)
+     getTodos()
+    })
+    .catch((error) => {
+      console.log('error in delete request', error)
+      alert('error with deleting a todo')
+    })
+  }
+
+  function isComplete(row) {
+    //turn the row into an object with $
+    //:eq() filters through td by index
+    const statusCell = $(row).find('td:eq(1)');
+    //check the text, trim eliminates white space which can cause errors
+    return statusCell.text().trim() === 'true';
   }
 
 //render
@@ -72,10 +103,15 @@ function renderTodos(todos) {
       <tr data-id = ${todo.id}>
         <td>${todo.task}</td>
         <td>${todo.complete}</td>
-        <td><button class="complete-btn">Complete?</button></td>
-        <td><button class = "delete-btn">❌</button></td>
+        <td class="td-btn-style"><button class="complete-btn">Complete</button></td>
+        <td class="td-btn-style"><button class = "delete-btn">Delete</button></td>
       </tr>
     `);
+
+    //change the background color of the rows depending on true or false
+    const rowIsComplete = isComplete(newRow);
+    newRow.addClass(rowIsComplete ? 'true-row' : 'false-row');
+
     $("#task-box").append(newRow);
     }
   }
