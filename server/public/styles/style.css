@@ -5,7 +5,7 @@ body {
 }
 
 .true-row {
-    background-color: rgb(165, 217, 231); /* background color for true */
+    background-color: rgb(165, 231, 216); /* background color for true */
   }
   
   .false-row {
@@ -13,7 +13,7 @@ body {
   }
 
   table {
-    border: solid rgb(165, 217, 231);
+    border: solid rgb(165, 231, 216);
     border-radius: 5px;
     width: 50%;
     margin: 0 25%
@@ -39,6 +39,13 @@ tfoot {
     height: 50px;
 }
 
+button {
+    font-family: sans-serif;
+    font-variant: small-caps;
+    font-size: medium;
+    border: none;
+}
+
 .complete-btn, .delete-btn {
     height: 50px;
     width: 80px;
@@ -46,13 +53,22 @@ tfoot {
 } 
 
 .complete-btn {
-    background-color: rgb(165, 217, 231);
+    background-color: rgb(165, 231, 216);
 }
 
 .delete-btn {
     background-color: rgb(211, 163, 163);
 }
 #submit-btn {
-    background-color: rgb(165, 217, 231);
+    width: 200px;
+    background-color: rgb(165, 231, 216);
     border-radius: 5px;
+}
+
+.custom-select {
+    width: 200px;
+}
+
+#task-input {
+    width: 192px;
 }
