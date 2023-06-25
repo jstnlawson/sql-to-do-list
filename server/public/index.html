@@ -5,14 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
     <script src="./vendors/jquery-3.7.0.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./scripts/client.js"></script>
     <title>SQL TODO</title>
 </head>
 <body>
-    <h1>To Do List</h1>
+    <h1>Add Task</h1>
 
     <input type="text" id="task-input" value="" placeholder="Enter task here">
-    <input type="text" id="task-complete" value="" placeholder="Is this task complete?">
+    <!-- <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Add Task</span>
+        </div>
+        <textarea class="form-control" aria-label="Add Task"></textarea>
+      </div> -->
+    <!-- <input type="text" id="task-complete" value="" placeholder="Is this task complete?"> -->
+    <div class="input-group mb-3">
+        <select class="custom-select" id="inputGroupSelect02">
+          <option selected>Is task complete?</option>
+          <option value="1">True</option>
+          <option value="2">False</option>
+        </select>
+        <div class="input-group-append">
+          <label class="input-group-text" for="inputGroupSelect02"></label>
+        </div>
+      </div>
     <button type="submit" id="submit-btn">Add Task</button>
     <br><br>
     

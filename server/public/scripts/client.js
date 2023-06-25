@@ -1,6 +1,6 @@
-// $(document).ready(onReady)
 
 $(document).ready(function () {
+    
 
 $('#submit-btn').on('click', postTask)
 $('#task-box').on('click', '.complete-btn', todoComplete)
@@ -12,7 +12,9 @@ getTodos()
 function postTask() {
     let todoObject = {
         task: $('#task-input').val(),
-        complete: $('#task-complete').val(),
+        //task: $('form-control').val(),
+        //complete: $('#task-complete').val(),
+        complete: $('#inputGroupSelect02').val(),
     }
     $.ajax({
         method: "POST",
@@ -22,7 +24,9 @@ function postTask() {
         .then((response) => {
           console.log("Response from server.", response);
           $('#task-input').val(""),
-          $('#task-complete').val("");
+          //$('.form-control').val(""),
+          //$('#task-complete').val("");
+          $('#inputGroupSelect02').val("");
           getTodos();
         })
         .catch((error) => {
@@ -54,6 +58,7 @@ function getTodos() {
     //const todoId = $(this).closest("tr").data("id");
     let closestTr = $(this).closest("tr")
     console.log('closestTr is:', closestTr)
+    console.log('closestTr html is:', $("closestTr").html())
     let todoId = closestTr.data("id")
     console.log('todoId in put', todoId)
     $.ajax({
@@ -108,6 +113,15 @@ function renderTodos(todos) {
         <td>${todo.complete}</td>
         <td class="td-btn-style"><button class="complete-btn">Complete</button></td>
         <td class="td-btn-style"><button class = "delete-btn">Delete</button></td>
+
+            <div class="modal-body">
+                <h5>Popover in a modal</h5>
+                <p>This <a href="#" role="button" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> triggers a popover on click.</p>
+                <hr>
+                <h5>Tooltips in a modal</h5>
+                <p><a href="#" class="tooltip-test" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="Tooltip">that link</a> have tooltips on hover.</p>
+            </div>
+
       </tr>
     `);
 
