@@ -13,8 +13,8 @@ function postTask() {
     let todoObject = {
         task: $('#task-input').val(),
         //task: $('form-control').val(),
-        //complete: $('#task-complete').val(),
-        complete: $('#inputGroupSelect02').val(),
+        complete: $('#task-complete').val(),
+        //complete: $('#inputGroupSelect02').val(),
     }
     $.ajax({
         method: "POST",
@@ -25,8 +25,8 @@ function postTask() {
           console.log("Response from server.", response);
           $('#task-input').val(""),
           //$('.form-control').val(""),
-          //$('#task-complete').val("");
-          $('#inputGroupSelect02').val("");
+          $('#task-complete').val("");
+          //$('#inputGroupSelect02').val("");
           getTodos();
         })
         .catch((error) => {
