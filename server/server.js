@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+//env. = environment
+//use magic or local5000
 const PORT = process.env.PORT || 5000;
 const todoRouter = require('./routes/todo.router.js')
 
